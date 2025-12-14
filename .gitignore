@@ -1,0 +1,7 @@
+.history
+.code
+.prettierrc
+.vscode
+
+dist
+node_modules
