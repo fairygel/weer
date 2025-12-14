@@ -1,8 +1,19 @@
 import express from 'express';
-import { index } from '../controllers/flashcards';
+
+import {
+	indexCard,
+	readCard,
+	createCard,
+	updateCard,
+	deleteCard,
+} from '../controllers/cards';
 
 const router = express.Router();
 
-router.get('/', index);
+router.get('/', indexCard);
+router.get('/:id', readCard);
+router.post('/', createCard);
+router.patch('/:id', updateCard);
+router.delete('/:id', deleteCard);
 
 export default router;

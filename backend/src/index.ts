@@ -1,17 +1,26 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import flashcardRoutes from './routes/flashcards';
+import setsRoutes from './routes/sets';
+import { connectDB } from './config/database';
 
 const app = express();
 const PORT = 5000;
 
-function main() {
-	app.use(express.json());
+app.use(express.json());
 
-	app.use('/api/flashcards', flashcardRoutes);
+async function main() {
+	try {
+		//await connectDB();
 
-	app.listen(PORT, () => {
-		console.log(`Server is running on http://localhost:${PORT}`);
-	});
+		app.use('/api/flashcards', flashcardRoutes);
+		app.use('/api/sets', setsRoutes);
+
+		app.listen(PORT, () => {
+			console.log(`Server is running on http://localhost:${PORT}`);
+		});
+	} catch (error) {
+		console.error('Failed to start server:', error);
+	}
 }
 
 main();
