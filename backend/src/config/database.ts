@@ -1,18 +1,23 @@
 import { MongoClient, Db } from 'mongodb';
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017';
-const DB_NAME = 'flashcards';
+export class Database {
+	private static db: Db;
 
-let db: Db;
+	static async connectDB(): Promise<Db> {
+		console.log('\x1b[92m[mongo] Connecting to Database...\x1b[0m');
 
-export async function connectDB(): Promise<Db> {
-	const client = new MongoClient(MONGO_URI);
-	await client.connect();
-	db = client.db(DB_NAME);
-	console.log('Connected to MongoDB');
-	return db;
-}
+		const uri = process.env.MONGO_URI || 'mongodb://localhost:27017';
+		const dbName = 'flashcards';
+		const client = new MongoClient(uri);
+		await client.connect();
 
-export function getDB(): Db {
-	return db;
+		Database.db = client.db(dbName);
+
+		console.log('\x1b[92m[mongo] Connected!\x1b[0m');
+		return Database.db;
+	}
+
+	static getDB(): Db {
+		return Database.db;
+	}
 }

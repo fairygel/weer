@@ -1,0 +1,8 @@
+services:
+  mongodb:
+    image: mongo:8.0
+    container_name: flashcards-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db

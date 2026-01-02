@@ -6,8 +6,7 @@ export class CardSet {
 	createdAt?: Date;
 	updatedAt?: Date;
 
-	constructor(userId: string, name: string, description?: string) {
-		//this.userId = userId;
+	constructor(name: string, description?: string) {
 		this.name = name;
 		this.description = description;
 		this.createdAt = new Date();
