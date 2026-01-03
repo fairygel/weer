@@ -1,5 +1,4 @@
 export class CardSet {
-	id?: string;
 	//userId: string;
 	name: string;
 	description?: string;

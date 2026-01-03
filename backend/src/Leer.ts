@@ -1,32 +1,26 @@
 import 'reflect-metadata';
 import express from 'express';
-import dotenv from 'dotenv';
-import { Database } from './config/database';
-import { SetRouter } from './routes/setRoutes';
+import { Database } from './config/Database';
+import { SetRouter } from './routes/SetRouter';
+import { AuthRouter } from './routes/AuthRouter';
 import { Service } from 'typedi';
 
 @Service()
 export class Leer {
 	constructor (
 		private setRouter: SetRouter,
+		private authRouter: AuthRouter,
 		private database: Database
 	) {}
 
-	private configure(): express.Express {
-		dotenv.config();
-
-		const app = express();
-		app.use(express.json());
-
-		return app
-	}
-
 	async start(PORT: number) {
 		try {
-			const app = this.configure();
+			const app = express();
+			app.use(express.json());
 
 			await this.database.connectDB();
 
+			app.use('/api/auth', this.authRouter.createAuthRoutes());
 			app.use('/api/sets', this.setRouter.createSetRoutes());
 
 			app.listen(PORT, () => {

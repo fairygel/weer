@@ -1,6 +1,12 @@
 services:
   mongodb:
     image: mongo:8.0
+    restart: always
+
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+
     container_name: flashcards-mongo
     ports:
       - "27017:27017"

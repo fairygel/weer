@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { CardSet } from '../models/CardSet';
 import { Service } from 'typedi';
-import { Database } from '../config/database';
+import { Database } from '../config/Database';
 
 @Service()
 export class SetRepository {

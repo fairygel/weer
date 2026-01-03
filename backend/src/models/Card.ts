@@ -5,7 +5,6 @@ export enum CardStatus {
 }
 
 export class Card {
-	id?: string;
 	setId: string;
 	question: string;
 	answer: string;
