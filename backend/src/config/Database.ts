@@ -8,9 +8,20 @@ export class Database {
 	async connectDB(): Promise<Db> {
 		console.log('\x1b[92m[mongo] Connecting to Database...\x1b[0m');
 
-		const uri = `mongodb://${process.env.MONGO_USER || 'root'}:${process.env.MONGO_PASSWORD || 'password'}@mongodb:27017/?authSource=admin`;
+		const dbUser = process.env.MONGO_USER || 'root';
+		const dbPass = process.env.MONGO_PASSWORD || 'password';
 		const dbName = process.env.DB_NAME || 'flashcards';
-		const client = new MongoClient(uri);
+
+		const uri = `mongodb://mongodb:27017`;
+
+		const client = new MongoClient(uri, {
+			auth: {
+				username: dbUser,
+				password: dbPass,
+			},
+			authSource: 'admin',
+		});
+
 		await client.connect();
 
 		Database.db = client.db(dbName);
