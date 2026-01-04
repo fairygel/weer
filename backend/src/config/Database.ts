@@ -8,7 +8,7 @@ export class Database {
 	async connectDB(): Promise<Db> {
 		console.log('\x1b[92m[mongo] Connecting to Database...\x1b[0m');
 
-		const uri = process.env.MONGO_URI || 'mongodb://localhost:27017';
+		const uri = `mongodb://${process.env.MONGO_USER || 'root'}:${process.env.MONGO_PASSWORD || 'password'}@mongodb:27017/?authSource=admin`;
 		const dbName = process.env.DB_NAME || 'flashcards';
 		const client = new MongoClient(uri);
 		await client.connect();

@@ -6,9 +6,11 @@ import { NextFunction, Request, Response } from 'express';
 export class AuthMiddleware {
 	constructor(
 		private jwt: JWT
-	) {}
+	) {
+		this.authenticate = this.authenticate.bind(this);
+	}
 
-	authenticate = (req: Request, res: Response, next: NextFunction) => {
+	authenticate(req: Request, res: Response, next: NextFunction) {
 		const authHeader = req.headers.authorization;
 
 		if (!authHeader) {
