@@ -22,8 +22,8 @@ export class Leer {
 
 			await this.database.connectDB();
 
-			app.use('/api/auth', this.authRouter.createAuthRoutes());
-			app.use('/api/sets', this.setRouter.createSetRoutes());
+			app.use('/leer/auth', this.authRouter.createAuthRoutes());
+			app.use('/leer/sets', this.setRouter.createSetRoutes());
 			app.set('trust proxy', true);
 
 			app.listen(PORT, '0.0.0.0', () => {
